@@ -18,6 +18,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
+    public Employee getEmployee(String id) {
+        return employeeRepository.findOne(id);
+    }
+
+    @Override
     public Employee getEmployeeByEmail(String email) {
         LOGGER.info("getEmployeeByEmail ( " + email + ") ");
 
@@ -38,12 +43,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void createEmployee(Employee employee) {
+    public Employee createEmployee(Employee employee) {
         LOGGER.info("createEmployee ( " + employee + ") ");
 
-        employeeRepository.save(employee);
+        Employee employee1 = employeeRepository.save(employee);
 
-        LOGGER.info("createEmployee created employee ( " + employee + " ) !");
+        LOGGER.info("createEmployee created employee ( " + employee1 + " ) !");
+        return employee1;
+    }
+
+    @Override
+    public List<Employee> getEmployees() {
+        return employeeRepository.findAll();
     }
 
 }

@@ -11,30 +11,34 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
 
     @GetMapping
-    public String hello() {
-        return "hello";
+    public List<Employee> list() {
+        return employeeService.getEmployees();
     }
 
-    @GetMapping(value="/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getEmployee(@PathVariable String name) {
+    @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getEmployee(@PathVariable String id) {
+        return employeeService.getEmployeeByName(id);
+    }
+
+    @GetMapping(value="/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getEmployeesByName(@PathVariable String name) {
         return employeeService.getEmployeeByName(name);
     }
 
     @PostMapping(value="/create")
-    public ModelAndView save(@RequestParam String name,
+    public Employee save(@RequestParam String name,
                              @RequestParam Integer age,
                              @RequestParam String email) {
         //TODO YK: add validations
-        Employee newEmp = new Employee(name, age, email);
-        employeeService.createEmployee(newEmp);
-        return new ModelAndView("redirect:/employee/"+email);
+        Employee newEmp = employeeService.createEmployee(new Employee(name, age, email));
+        return newEmp;
     }
 
 }
