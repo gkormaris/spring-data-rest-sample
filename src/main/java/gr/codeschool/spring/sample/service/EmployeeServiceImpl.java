@@ -7,12 +7,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+    private Map<String, Integer> cache = new HashMap<>();
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -46,7 +50,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee createEmployee(Employee employee) {
         LOGGER.info("createEmployee ( " + employee + ") ");
 
+        if (cache.containsKey(employee.getEmail())) {
+            throw new RuntimeException("You are not allowed to do this");
+        }
+
         Employee employee1 = employeeRepository.save(employee);
+        cache.putIfAbsent(employee1.getEmail(), 1);
 
         LOGGER.info("createEmployee created employee ( " + employee1 + " ) !");
         return employee1;
