@@ -1,10 +1,15 @@
 package gr.codeschool.spring.sample.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name="employee", schema = "springjpasample")
-public class Employee {
+public class Employee implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq_gen")
@@ -20,6 +25,10 @@ public class Employee {
 
     @Column(name = "email", unique = true)
     private String email;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="dep_id", nullable=true)
+	private Department department;
 
     public String getEmail() {
         return email;
@@ -59,10 +68,18 @@ public class Employee {
 
 	public void setAge(Integer age) {
 		this.age = age;
-	}	
+	}
 
 	public String toString() {
 		return "Employee (" + getId() + ", " + getName() + ", " + age + ")";
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 	
 	@Override
@@ -85,4 +102,5 @@ public class Employee {
 	public int hashCode() {
 		return id == null ? 0 : id.hashCode();
 	}
+
 }

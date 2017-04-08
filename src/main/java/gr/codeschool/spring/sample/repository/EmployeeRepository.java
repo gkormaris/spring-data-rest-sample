@@ -11,7 +11,7 @@ import gr.codeschool.spring.sample.model.Employee;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee,String> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findEmployeesByAge(int age);
 

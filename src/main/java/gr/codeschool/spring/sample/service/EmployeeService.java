@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    Employee getEmployee(String id);
+    Employee getEmployee(Long id);
 
     Employee getEmployeeByEmail(String email);
 

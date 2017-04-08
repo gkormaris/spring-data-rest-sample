@@ -23,8 +23,8 @@ public class EmployeeController {
     }
 
     @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getEmployee(@PathVariable String id) {
-        return employeeService.getEmployeeByName(id);
+    public Employee getEmployee(@PathVariable Long id) {
+        return employeeService.getEmployee(id);
     }
 
     @GetMapping(value="/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,7 +36,6 @@ public class EmployeeController {
     public Employee save(@RequestParam String name,
                              @RequestParam Integer age,
                              @RequestParam String email) {
-        //TODO YK: add validations
         Employee newEmp = employeeService.createEmployee(new Employee(name, age, email));
         return newEmp;
     }
