@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Table(name="employee", schema = "springjpasample")
+@Table(name="employee")
 public class Employee implements Serializable {
 
 	@Id

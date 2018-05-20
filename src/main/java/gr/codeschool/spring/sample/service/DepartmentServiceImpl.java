@@ -21,7 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department getDepartment(Long id) {
         LOGGER.info("getDepartment ( {} ) ", id);
 
-        Department dep = departmentRepository.findOne(id);
+        Department dep = departmentRepository.findById(id).orElse(null);
 
         LOGGER.info("getDepartment: {} ", dep);
         return dep;
