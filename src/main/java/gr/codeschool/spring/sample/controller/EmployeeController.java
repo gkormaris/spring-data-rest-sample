@@ -32,7 +32,7 @@ public class EmployeeController {
         return employeeService.getEmployeeByName(name);
     }
 
-    @PostMapping(value="/create")
+    @PostMapping
     public Employee save(@RequestParam String name,
                              @RequestParam Integer age,
                              @RequestParam String email) {
