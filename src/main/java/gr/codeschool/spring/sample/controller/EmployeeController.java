@@ -31,7 +31,7 @@ public class EmployeeController {
         return employeeService.getEmployeeByName(name);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Employee save(@RequestBody EmployeeDto employeedto) {
         Employee newEmp = employeeService.createEmployee(new Employee(employeedto.getName(), employeedto.getAge(), employeedto.getEmail()));
         return newEmp;
