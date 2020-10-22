@@ -1,12 +1,11 @@
 package gr.codeschool.spring.sample.controller;
 
 import gr.codeschool.spring.sample.model.Employee;
+import gr.codeschool.spring.sample.model.EmployeeDto;
 import gr.codeschool.spring.sample.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -33,10 +32,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee save(@RequestParam String name,
-                             @RequestParam Integer age,
-                             @RequestParam String email) {
-        Employee newEmp = employeeService.createEmployee(new Employee(name, age, email));
+    public Employee save(@RequestBody EmployeeDto employeedto) {
+        Employee newEmp = employeeService.createEmployee(new Employee(employeedto.getName(), employeedto.getAge(), employeedto.getEmail()));
         return newEmp;
     }
 
