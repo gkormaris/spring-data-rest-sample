@@ -1,5 +1,6 @@
 package gr.codeschool.spring.sample;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +15,9 @@ public class SpringSampleApplication {
 
     @Bean
     public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
-        return new Jackson2ObjectMapperBuilder().indentOutput(true);
+        return new Jackson2ObjectMapperBuilder()
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
+                .indentOutput(true);
     }
 
 }
