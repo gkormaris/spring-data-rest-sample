@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS department;
 
 CREATE TABLE department (
-    id          INT           NOT NULL,
+    id          IDENTITY      NOT NULL,
     name        VARCHAR(40)   NOT NULL,
     building    VARCHAR(40)   NOT NULL,
     PRIMARY KEY (id),
@@ -11,7 +11,7 @@ CREATE TABLE department (
 DROP TABLE IF EXISTS employee;
 
 CREATE TABLE employee (
-    id          INT             NOT NULL,
+    id          IDENTITY        NOT NULL,
     name        VARCHAR(14)     NULL,
     age         VARCHAR(16)     NULL,
     email       VARCHAR(16)     NULL,
