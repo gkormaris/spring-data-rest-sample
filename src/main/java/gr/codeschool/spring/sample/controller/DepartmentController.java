@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
@@ -16,11 +15,13 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    @CrossOrigin
     @GetMapping
     public List<Department> list() {
         return departmentService.getDepartments();
     }
 
+    @CrossOrigin
     @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Department getDepartment(@PathVariable Long id) {
         return departmentService.getDepartment(id);
