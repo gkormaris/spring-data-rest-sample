@@ -4,7 +4,10 @@ import gr.codeschool.spring.sample.model.Department;
 import gr.codeschool.spring.sample.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,13 +18,11 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @CrossOrigin
     @GetMapping
     public List<Department> list() {
         return departmentService.getDepartments();
     }
 
-    @CrossOrigin
     @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Department getDepartment(@PathVariable Long id) {
         return departmentService.getDepartment(id);
